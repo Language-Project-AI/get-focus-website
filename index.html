@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Focus — One tap. Deep work begins.</title>
-    <meta name="description" content="A focus ritual for deep work. No timers. No stats. Just the shift.">
-    <meta property="og:title" content="Get Focus">
-    <meta property="og:description" content="One tap. Deep work begins.">
+    <title>Get Fcous — one tap and then.. fcous.</title>
+    <meta name="description" content="One tap and then.. fcous. No timers. No stats. Just the shift.">
+    <meta property="og:title" content="Get Fcous">
+    <meta property="og:description" content="One tap and then.. fcous.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://get-focus.app">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -33,103 +33,198 @@
         }
 
         .container {
-            max-width: 480px;
+            max-width: 520px;
             width: 100%;
             text-align: center;
         }
 
-        /* Animated orb */
+        /* Animated orb - much more dynamic */
         .orb-container {
             position: relative;
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 48px;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
         }
 
         .orb {
             position: absolute;
             inset: 0;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%,
-                rgba(255, 191, 115, 0.9) 0%,
-                rgba(255, 140, 66, 0.7) 40%,
-                rgba(200, 80, 50, 0.4) 70%,
+            background: radial-gradient(circle at 35% 35%,
+                rgba(255, 200, 140, 1) 0%,
+                rgba(255, 160, 80, 0.9) 25%,
+                rgba(220, 120, 60, 0.8) 50%,
+                rgba(180, 80, 40, 0.5) 75%,
                 transparent 100%);
-            animation: pulse 4s ease-in-out infinite;
+            animation: orbPulse 3s ease-in-out infinite;
+            box-shadow:
+                0 0 60px rgba(255, 150, 80, 0.4),
+                0 0 120px rgba(255, 120, 60, 0.2),
+                inset 0 0 40px rgba(255, 180, 100, 0.3);
         }
 
         .orb-glow {
             position: absolute;
-            inset: -20px;
+            inset: -40px;
             border-radius: 50%;
             background: radial-gradient(circle,
-                rgba(255, 170, 80, 0.3) 0%,
-                rgba(255, 140, 60, 0.1) 50%,
+                rgba(255, 160, 80, 0.4) 0%,
+                rgba(255, 120, 60, 0.2) 40%,
                 transparent 70%);
-            animation: glow 4s ease-in-out infinite;
-            filter: blur(20px);
+            animation: glowPulse 3s ease-in-out infinite;
+            filter: blur(30px);
         }
 
         .orb-ring {
             position: absolute;
-            inset: -4px;
+            inset: -6px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 191, 115, 0.3);
-            animation: ring 4s ease-in-out infinite;
+            border: 1.5px solid rgba(255, 180, 100, 0.4);
+            animation: ringPulse 3s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.05); opacity: 1; }
+        .orb-ring-outer {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 180, 100, 0.15);
+            animation: ringOuterPulse 3s ease-in-out infinite;
         }
 
-        @keyframes glow {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 180, 120, 0.6);
+            border-radius: 50%;
+            filter: blur(1px);
         }
 
-        @keyframes ring {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.08); opacity: 0.5; }
+        .particle:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation: float1 4s ease-in-out infinite;
         }
 
-        /* App name */
+        .particle:nth-child(2) {
+            top: 80%;
+            left: 70%;
+            animation: float2 5s ease-in-out infinite;
+        }
+
+        .particle:nth-child(3) {
+            top: 30%;
+            right: 10%;
+            animation: float3 4.5s ease-in-out infinite;
+        }
+
+        @keyframes orbPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow:
+                    0 0 60px rgba(255, 150, 80, 0.4),
+                    0 0 120px rgba(255, 120, 60, 0.2),
+                    inset 0 0 40px rgba(255, 180, 100, 0.3);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow:
+                    0 0 80px rgba(255, 150, 80, 0.5),
+                    0 0 160px rgba(255, 120, 60, 0.3),
+                    inset 0 0 50px rgba(255, 180, 100, 0.4);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.15); }
+        }
+
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        @keyframes ringOuterPulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.12); opacity: 0.3; }
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+            50% { transform: translate(10px, -15px) scale(1.2); opacity: 1; }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            50% { transform: translate(-12px, -10px) scale(1.3); opacity: 0.9; }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            50% { transform: translate(-8px, 12px) scale(1.1); opacity: 0.8; }
+        }
+
+        /* App name - THE HERO */
         .app-name {
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 3px;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(36px, 10vw, 58px);
+            font-weight: 700;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            color: rgba(255, 191, 115, 0.9);
-            margin-bottom: 24px;
+            color: rgba(255, 191, 115, 1);
+            margin-bottom: 32px;
+            text-shadow: 0 0 40px rgba(255, 170, 80, 0.3);
         }
 
-        /* Tagline */
+        /* Tagline - artistic handwritten style */
         .tagline {
-            font-size: clamp(28px, 7vw, 42px);
-            font-weight: 300;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(26px, 6vw, 34px);
+            font-weight: 500;
             line-height: 1.3;
-            margin-bottom: 16px;
-            color: #ffffff;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
         }
 
-        .tagline strong {
-            font-weight: 500;
+        .tagline .highlight {
+            color: rgba(255, 191, 115, 0.95);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .tagline .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 191, 115, 0.6), transparent);
+            animation: underlineGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes underlineGlow {
+            0%, 100% { opacity: 0.4; transform: scaleX(0.8); }
+            50% { opacity: 1; transform: scaleX(1); }
         }
 
         /* Subtitle */
         .subtitle {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
             margin-bottom: 48px;
-            line-height: 1.5;
+            letter-spacing: 0.5px;
         }
 
         /* Store buttons */
         .store-buttons {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             align-items: center;
         }
 
@@ -137,13 +232,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
-            max-width: 220px;
-            padding: 14px 24px;
-            border-radius: 12px;
+            max-width: 200px;
+            padding: 12px 20px;
+            border-radius: 10px;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             transition: all 0.2s ease;
         }
@@ -156,18 +251,19 @@
         .store-btn.ios:hover {
             background: #f0f0f0;
             transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
         }
 
         .store-btn.android {
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             cursor: default;
         }
 
         .store-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             flex-shrink: 0;
         }
 
@@ -183,42 +279,30 @@
         }
 
         .btn-text .small {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 400;
             opacity: 0.7;
         }
 
         .btn-text .main {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: 64px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .footer a {
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: rgba(255, 191, 115, 0.8);
         }
 
         /* Mobile adjustments */
         @media (max-width: 400px) {
             .orb-container {
-                width: 140px;
-                height: 140px;
-                margin-bottom: 40px;
+                width: 160px;
+                height: 160px;
+                margin-bottom: 32px;
+            }
+
+            .app-name {
+                letter-spacing: 5px;
             }
 
             .store-btn {
-                padding: 12px 20px;
+                padding: 10px 16px;
             }
         }
 
@@ -234,13 +318,17 @@
     <div class="container">
         <div class="orb-container">
             <div class="orb-glow"></div>
+            <div class="orb-ring-outer"></div>
             <div class="orb-ring"></div>
             <div class="orb"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
         </div>
 
         <div class="app-name">Get Fcous</div>
 
-        <h1 class="tagline">One tap.<br><strong>Deep work begins.</strong></h1>
+        <p class="tagline">one tap.. <span class="highlight">Fcous.</span></p>
 
         <p class="subtitle">No timers. No stats. Just the shift.</p>
 
@@ -265,7 +353,6 @@
                 </span>
             </div>
         </div>
-
     </div>
 </body>
 </html>
