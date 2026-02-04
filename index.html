@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Focus — One tap. Deep work begins.</title>
+    <meta name="description" content="A focus ritual for deep work. No timers. No stats. Just the shift.">
+    <meta property="og:title" content="Get Focus">
+    <meta property="og:description" content="One tap. Deep work begins.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://get-focus.app">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Animated orb */
+        .orb-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 48px;
+        }
+
+        .orb {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(255, 191, 115, 0.9) 0%,
+                rgba(255, 140, 66, 0.7) 40%,
+                rgba(200, 80, 50, 0.4) 70%,
+                transparent 100%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .orb-glow {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgba(255, 170, 80, 0.3) 0%,
+                rgba(255, 140, 60, 0.1) 50%,
+                transparent 70%);
+            animation: glow 4s ease-in-out infinite;
+            filter: blur(20px);
+        }
+
+        .orb-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 191, 115, 0.3);
+            animation: ring 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes ring {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.08); opacity: 0.5; }
+        }
+
+        /* App name */
+        .app-name {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 191, 115, 0.9);
+            margin-bottom: 24px;
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: clamp(28px, 7vw, 42px);
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .tagline strong {
+            font-weight: 500;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 48px;
+            line-height: 1.5;
+        }
+
+        /* Store buttons */
+        .store-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 220px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .store-btn.ios {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .store-btn.ios:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .store-btn.android {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: default;
+        }
+
+        .store-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .store-btn.android svg {
+            opacity: 0.5;
+        }
+
+        .btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+
+        .btn-text .small {
+            font-size: 10px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .btn-text .main {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 64px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: rgba(255, 191, 115, 0.8);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 400px) {
+            .orb-container {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 40px;
+            }
+
+            .store-btn {
+                padding: 12px 20px;
+            }
+        }
+
+        @media (min-width: 500px) {
+            .store-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="orb-container">
+            <div class="orb-glow"></div>
+            <div class="orb-ring"></div>
+            <div class="orb"></div>
+        </div>
+
+        <div class="app-name">Get Fcous</div>
+
+        <h1 class="tagline">One tap.<br><strong>Deep work begins.</strong></h1>
+
+        <p class="subtitle">No timers. No stats. Just the shift.</p>
+
+        <div class="store-buttons">
+            <a href="https://apps.apple.com/app/get-fcous/id6744870358" class="store-btn ios" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <span class="btn-text">
+                    <span class="small">Download on the</span>
+                    <span class="main">App Store</span>
+                </span>
+            </a>
+
+            <div class="store-btn android">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.523 2.293a.5.5 0 0 0-.67.223l-1.443 2.888A8.993 8.993 0 0 0 12 4.5c-1.2 0-2.35.234-3.41.904L7.147 2.516a.5.5 0 1 0-.894.448l1.416 2.832A9.027 9.027 0 0 0 3 13.5h18a9.027 9.027 0 0 0-4.67-7.704l1.416-2.832a.5.5 0 0 0-.223-.67zM8.5 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm7 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM3 14.5v5A2.5 2.5 0 0 0 5.5 22h13a2.5 2.5 0 0 0 2.5-2.5v-5H3z"/>
+                </svg>
+                <span class="btn-text">
+                    <span class="small">Coming soon on</span>
+                    <span class="main">Google Play</span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
